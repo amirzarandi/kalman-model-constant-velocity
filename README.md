@@ -34,7 +34,7 @@ Reproduced from Wikipedia (below) we have the systems of equations (in matrix fo
 The Kalman filter model assumes the true state at time $\mathrm{k}$ is evolved from the state at $(\mathrm{k}-1)$ according to:
 
 $$
-\mathbf{x}_{k}=\mathbf{A}_{k} \mathbf{x}_{k-1}+\mathbf{B}_{k} \mathbf{u}_{k}+\mathbf{w}_{k}
+{x}_{k}=f{A}_{k} {x}_{k-1}+{B}_{k} {u}_{k}+{w}_{k}
 $$
 
 where,
