@@ -44,7 +44,7 @@ where,
 - $w_{k}$ is the process noise which is assumed to be drawn from a zero mean multivariate normal distribution with covariance $Q_{k}$ :
 
 $$
-\mathbf{w}_{k} \sim \mathcal{N}\left(0, \mathbf{Q}_{k}\right)
+\mathbf{w}_{k} \sim \mathcal{N}(0, \mathbf{Q}_{k})
 $$
 
 At time $k$ an observation (or measurement) $z_{k}$ of the true state $x_{k}$ is made according to:
