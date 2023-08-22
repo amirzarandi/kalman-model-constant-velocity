@@ -1,4 +1,4 @@
-# Kalman Filtering: <br> Tracking Object Moving with Constant Velocity The Model 
+# Kalman Filtering: <br> Tracking Object Moving with Constant Velocity
 
 ## 1. Problem Statement
 
