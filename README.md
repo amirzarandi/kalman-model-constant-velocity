@@ -32,9 +32,9 @@ Reproduced from Wikipedia (below) we have the systems of equations (in matrix fo
 
 The Kalman filter model assumes the true state at time $\mathrm{k}$ is evolved from the state at $(\mathrm{k}-1)$ according to:
 
-$$
-\bm{x}_{k}=\bm{A}_{k} \bm{x}_{k-1}+\bm{B}_{k} \bm{u}_{k}+\bm{w}_{k}
-$$
+```math
+\mathbf{x}_{k}=\mathbf{A}_{k} \mathbf{x}_{k-1}+\mathbf{B}_{k} \mathbf{u}_{k}+\mathbf{w}_{k}
+```
 
 where,
 
@@ -42,23 +42,23 @@ where,
 - $B_{k}$ is the control-input model which is applied to the control vector $u_{k}$ (not relevant in this example);
 - $w_{k}$ is the process noise which is assumed to be drawn from a zero mean multivariate normal distribution with covariance $Q_{k}$ :
 
-$$
+```math
 \mathbf{w}_{k} \sim \mathcal{N}\left(0, \mathbf{Q}_{k}\right)
-$$
+```
 
 At time $k$ an observation (or measurement) $z_{k}$ of the true state $x_{k}$ is made according to:
 
-$$
+```math
 \mathbf{z}_{k}=\mathbf{H}_{k} \mathbf{x}_{k}+\mathbf{v}_{k} \mathbf{z}_{k}
-$$
+```
 
 where $H_{k}$ is the observation model which maps the true state space into the observed space and $v_{k}$ is the observation noise which is assumed to be zero mean Gaussian white noise with covariance $R_{k}$.
 
-$$
+```math
 \mathbf{v}_{k} \sim \mathcal{N}\left(0, \mathbf{R}_{k}\right)
-$$
+```
 
-The initial state, and the noise vectors at each step $\left\{x_{0}, w_{1}, \ldots, w_{k}, v_{1} \ldots v_{k}\right\}$ are all assumed to be mutually independent.
+The initial state, and the noise vectors at each step $\{x_{0}, w_{1}, \ldots, w_{k}, v_{1} \ldots v_{k}\}$ are all assumed to be mutually independent.
 
 ### 3.2. Filtering
 
@@ -74,16 +74,43 @@ Typically, the two phases alternate, with the prediction advancing the state unt
 
 #### 3.2.1. Predict
 
-1. Predicted (a priori) state estimate: $\hat{\mathbf{x}}_{k \mid k-1}=\mathbf{A}_{k} \hat{\mathbf{x}}_{k-1 \mid k-1}+\mathbf{B}_{k} \mathbf{u}_{k}$
-2. Predicted (a priori) estimate covariance: $\mathbf{P}_{k \mid k-1}=\mathbf{A}_{k} \mathbf{P}_{k-1 \mid k-1} \mathbf{A}_{k}^{T}+\mathbf{Q}_{k}$
+1. Predicted (a priori) state estimate:
+   ```math
+   \hat{\mathbf{x}}_{k \mid k-1}=\mathbf{A}_{k} \hat{\mathbf{x}}_{k-1 \mid k-1}+\mathbf{B}_{k} \mathbf{u}_{k}
+   '''
+   
+2. Predicted (a priori) estimate covariance:
+   ```math
+   \mathbf{P}_{k \mid k-1}=\mathbf{A}_{k} \mathbf{P}_{k-1 \mid k-1} \mathbf{A}_{k}^{T}+\mathbf{Q}_{k}
+   ```
+  
 
 #### 3.2.2. Update
 
-1. Innovation or measurement residual: $\tilde{\mathbf{y}}_{k}=\mathbf{z}_{k}-\mathbf{H}_{k} \hat{\mathbf{x}}_{k \mid k-1}$
-2. Innovation (or residual) covariance: $\mathbf{S}_{k}=\mathbf{H}_{k} \mathbf{P}_{k \mid k-1} \mathbf{H}_{k}^{T}+\mathbf{R}_{k}$
-3. Optimal Kalman gain: $\mathbf{K}_{k}=\mathbf{P}_{k \mid k-1} \mathbf{H}_{k}^{T} \mathbf{S}_{k}^{-1}$
-4. Updated (a posteriori) state estimate: $\hat{\mathbf{x}}_{k \mid k}=\hat{\mathbf{x}}_{k \mid k-1}+\mathbf{K}_{k} \tilde{\mathbf{y}}_{k}$
-5. Updated (a posteriori) estimate covariance: $\mathbf{P}_{k \mid k}=\left(I-\mathbf{K}_{k} \mathbf{H}_{k}\right) \mathbf{P}_{k \mid k-1}$
+1. Innovation or measurement residual:
+   ```math
+   \tilde{\mathbf{y}}_{k}=\mathbf{z}_{k}-\mathbf{H}_{k} \hat{\mathbf{x}}_{k \mid k-1}
+   ```
+
+2. Innovation (or residual) covariance:
+   ```math
+   \mathbf{S}_{k}=\mathbf{H}_{k} \mathbf{P}_{k \mid k-1} \mathbf{H}_{k}^{T}+\mathbf{R}_{k}
+   ```
+
+3. Optimal Kalman gain:
+   ```math
+   \mathbf{K}_{k}=\mathbf{P}_{k \mid k-1} \mathbf{H}_{k}^{T} \mathbf{S}_{k}^{-1}
+   ```
+
+4. Updated (a posteriori) state estimate:
+   ```math
+   \hat{\mathbf{x}}_{k \mid k}=\hat{\mathbf{x}}_{k \mid k-1}+\mathbf{K}_{k} \tilde{\mathbf{y}}_{k}
+   ```
+
+5. Updated (a posteriori) estimate covariance:
+   ```math
+   \mathbf{P}_{k \mid k}=\left(I-\mathbf{K}_{k} \mathbf{H}_{k}\right) \mathbf{P}_{k \mid k-1}
+   ```
 
 ### 3.3. Constant Velocity Model
 
